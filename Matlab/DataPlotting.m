@@ -2,9 +2,9 @@
 %plots data
 clear
 load('round1TDailyData.mat')
-
 %%
-%numerical data
+%quantitative data
+
 %Normalising variables
 numData=table2array(round1TDailyData(:,2:end-3));
 mu=mean(numData,1);
@@ -62,7 +62,7 @@ end
 
 
 %%
-%Plotting
+%Plotting volume vs time
 
 figure
 plot(datetime(table2array(round1TDailyData(:,1))),normData);
@@ -98,9 +98,9 @@ legend('Relative Humidity','Volume')
 
 subplot(3,3,5)
 plot(datetime(table2array(round1TDailyData(:,1))),normData(:,5),datetime(table2array(round1TDailyData(:,1))),normData(:,8),'k')
-title('Precipitation vs Volume')
+title('Atmospheric Precipitation vs Volume')
 ylabel('Normalised')
-legend('Precipitaton','Volume')
+legend('Atmospheric Precipitation','Volume')
 
 subplot(3,3,6)
 plot(datetime(table2array(round1TDailyData(:,1))),normData(:,6),datetime(table2array(round1TDailyData(:,1))),normData(:,8),'k')
@@ -118,3 +118,47 @@ bar([1 0],[winterYes winterNo]);
 subplot(3,3,9)
 title('School')
 bar([1 0],[schoolHolYes schoolHolNo]);
+
+%%
+%Plotting scatter graphs 
+
+%variables
+data=table2array(round1TDailyData(:,2:end-3));
+
+figure
+
+subplot(3,2,1)
+scatter(data(:,1),data(:,8),'.')
+title('Temperature vs Volume')
+ylabel('Volume')
+xlabel('Temperature')
+
+subplot(3,2,2)
+scatter(data(:,2),data(:,8),'.')
+title('Cloud Cover vs Volume')
+ylabel('Volume')
+xlabel('Cloud Cover')
+
+subplot(3,2,3)
+scatter(data(:,3),data(:,8),'.')
+title('Wind Speed vs Volume')
+ylabel('Volume')
+xlabel('Wind Speed')
+
+subplot(3,2,4)
+scatter(data(:,4),data(:,8),'.')
+title('Relative Humidity vs Volume')
+ylabel('Volume')
+xlabel('Relative Humidity')
+
+subplot(3,2,5)
+scatter(data(:,5),data(:,8),'.')
+title('Atmospheric Precipitation vs Volume')
+ylabel('Volume')
+xlabel('Atmospheric Precipitation')
+
+subplot(3,2,6)
+scatter(data(:,6),data(:,8),'.')
+title('Solar Radiation vs Volume')
+ylabel('Volume')
+xlabel('Solar Radiation')
