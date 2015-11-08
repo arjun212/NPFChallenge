@@ -28,8 +28,8 @@ for idx=1:1:r
 end
 %hourly table for all, EXCEPT DAY TYPE, data
 round1TDailyData=[uiqueDates array2table(aveArray) round1training1of2(:,5) round1training1of2(:,2:4)];
-%round1TDailyData(:,9)=[];%removing DateTime Column
 round1TDailyData(:,2)=[];%removing Time Column
+
 
 %Adding variable names and units in table
 round1TDailyData.Properties.VariableNames={'Date' 'Temperature' 'CloudCover' 'WindSpeed' 'RelativeHumidity'...
