@@ -2,7 +2,6 @@
 %plots data
 clear
 load('round1TDailyData.mat')
-
 %%
 %quantitative data
 
@@ -17,9 +16,9 @@ for i=1:1:r
         normData(i,j)=(numData(i,j)-mu(j))/(sd(j));
     end
 end
-
 %%
 %Qualitative data
+
 
 %Type of day
 dayType=table2array(round1TDailyData(:,10));
@@ -107,8 +106,7 @@ for i=1:1:numel(schoolHoliday)
         schoolHolNo=(schoolHolNo+numData(i,8))/2;
     end
 end
-
-% % % % bar([1 0],[schoolHolYes schoolHolNo]);
+bar([1 0],[schoolHolYes schoolHolNo]);
 
 %Winter
 winter=table2array(round1TDailyData(:,12));
