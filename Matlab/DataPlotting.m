@@ -7,7 +7,7 @@ load('round1TDailyData.mat')
 %quantitative data
 
 %Normalising variables
-numData=table2array(round1TDailyData(:,2:end-3));
+numData=table2array(round1TDailyData(:,2:end-5));
 mu=mean(numData,1);
 sd=(var(numData,0,1)).^0.5;
 [r,c]=size(numData);
@@ -31,7 +31,7 @@ round1TDailyData(:,10)
 qualData=[qualData table2array(round1TDailyData(:,11:12))];
 
 %%
-data=table2array(round1TDailyData(:,2:end-3));
+data=table2array(round1TDailyData(:,2:end-5));
 
 figure
 subplot(2,1,1)
