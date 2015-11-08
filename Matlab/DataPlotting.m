@@ -96,7 +96,7 @@ xlabel('Solar Radiation')
 %%
 %School holiday
 schoolHoliday=table2array(round1TDailyData(:,11));
-noOfOccour = [sum(qualData(:,2)== 1) sum(qualData(:,2)== 0)];
+% % % % % noOfOccour = [sum(qualData(:,2)== 1) sum(qualData(:,2)== 0)];
 
 schoolHolYes=0;
 schoolHolNo=0;
