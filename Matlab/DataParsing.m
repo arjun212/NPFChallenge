@@ -17,6 +17,8 @@ uiqueDates=[unique(completeData(:,1),'first')]; %extracting unique rows from 'Co
 
 [r,c]=size(uiqueDates);
 aveArray=[];
+sumRainfall=[];
+sumSolarRad=[];
 for idx=1:1:r
     %finding the rows for each day
     date=table2array(uiqueDates(idx,1));
@@ -24,17 +26,20 @@ for idx=1:1:r
     dayVals=completeData(any(repeatedVals,2),:);
     %averaging daily values and adding
     aveDayVals=mean(table2array(dayVals(:,2:end)),1);
+    sumRainfall=[sumRainfall  ;  sum(table2array(dayVals(:,7)))];
+    sumSolarRad=[sumSolarRad  ;  sum(table2array(dayVals(:,8)))];
     aveArray=[aveArray;aveDayVals];
 end
+
 %hourly table for all, EXCEPT DAY TYPE, data
-round1TDailyData=[uiqueDates array2table(aveArray) round1training1of2(:,5) round1training1of2(:,2:4)];
+round1TDailyData=[uiqueDates array2table(aveArray) round1training1of2(:,5) round1training1of2(:,2:4) array2table(sumRainfall) array2table(sumSolarRad)];
 round1TDailyData(:,2)=[];%removing Time Column
 
 
 %Adding variable names and units in table
 round1TDailyData.Properties.VariableNames={'Date' 'Temperature' 'CloudCover' 'WindSpeed' 'RelativeHumidity'...
-    'AtmosphericPrecipitation' 'SolarRadiation' 'DateNum' 'Volume' 'TypeOfDay' 'SchoolHoliday' 'Winter'};
+    'Ave_Atmospheric_Precipitation' 'Ave_SolarRadiation' 'DateNum' 'Volume' 'TypeOfDay' 'SchoolHoliday' 'Winter' 'Cumulat_Rainfall' 'Cumulat_Solar_Rad'};
 round1TDailyData.Properties.VariableUnits={'mm/dd/yyy' 'degC' 'Okta' 'm/s' '%'...
-    'mm' 'KJ/m^2' 'N/A' 'kWh' 'N/A' 'Y,N' 'Y,N'};
+    'mm' 'KJ/m^2' 'N/A' 'kWh' 'N/A' 'Y,N' 'Y,N' 'mm' 'KJ/m^2'};
 
 save('round1TDailyData','round1TDailyData')
