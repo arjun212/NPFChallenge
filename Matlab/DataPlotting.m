@@ -6,40 +6,61 @@ load('round1TDailyData.mat')
 data=table2array(round1TDailyData(:,2:end-3));
 
 figure
+subplot(2,1,1)
+co = corr(data(:,5),data(:,2));
+scatter(data(:,2),data(:,5),'.')
+title(sprintf('Atmospheric Precipitation vs.  Cloud Cover R=%f', co))
+ylabel('Atmospheric Precpitation')
+xlabel('Cloud Cover')
+
+subplot(2,1,2)
+co = corr(data(:,5),data(:,4));
+scatter(data(:,4),data(:,5),'.')
+title(sprintf('Atmospheric Precipitation vs.  Humidity R=%f', co))
+ylabel('Atmospheric Precpitation')
+xlabel('Humidity')
+
+figure
 
 subplot(3,2,1)
+co = corr(data(:,1),data(:,8));
 scatter(data(:,1),data(:,8),'.')
-title('Temperature vs Volume')
+title(sprintf('Temperature vs Volume R=%f', co))
 ylabel('Volume')
 xlabel('Temperature')
 
 subplot(3,2,2)
+co = corr(data(:,2),data(:,8));
 scatter(data(:,2),data(:,8),'.')
-title('Cloud Cover vs Volume')
+title(sprintf('Cloud Cover vs Volume R=%f', co))
 ylabel('Volume')
 xlabel('Cloud Cover')
 
 subplot(3,2,3)
+co = corr(data(:,3),data(:,8));
 scatter(data(:,3),data(:,8),'.')
-title('Wind Speed vs Volume')
+title(sprintf('Wind Speed vs Volume R=%f', co))
 ylabel('Volume')
 xlabel('Wind Speed')
 
 subplot(3,2,4)
+co = corr(data(:,4),data(:,8));
 scatter(data(:,4),data(:,8),'.')
-title('Relative Humidity vs Volume')
+title(sprintf('Relative Humidity vs Volume R=%f', co))
 ylabel('Volume')
 xlabel('Relative Humidity')
 
 subplot(3,2,5)
+co = corr(data(:,5),data(:,8));
 scatter(data(:,5),data(:,8),'.')
-title('Atmospheric Precipitation vs Volume')
+title(sprintf('Atmospheric Precipitation vs Volume R=%f', co))
 ylabel('Volume')
 xlabel('Atmospheric Precipitation')
 
 subplot(3,2,6)
+co = corr(data(:,6),data(:,8));
 scatter(data(:,6),data(:,8),'.')
-title('Solar Radiation vs Volume')
+title(sprintf('Solar Radiation vs Volume R=%f', co))
 ylabel('Volume')
 xlabel('Solar Radiation')
 
