@@ -9,8 +9,8 @@
 
 clear;
 load('round1TDailyData.mat');
-variables=[table2array(round1TDailyData(:,2:7)),table2array(round1TDailyData(:,9))];
-vol=table2array(round1TDailyData(:,8));
+variables=[table2array(round1TDailyData(:,2:8))];
+vol=table2array(round1TDailyData(:,9));
 time=datetime(table2array(round1TDailyData(:,1)));
 
 x = variables';
