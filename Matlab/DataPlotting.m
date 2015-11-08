@@ -31,6 +31,7 @@ round1TDailyData(:,10)
 qualData=[qualData table2array(round1TDailyData(:,11:12))];
 
 %%
+% Scatter plots
 data=table2array(round1TDailyData(:,2:end-5));
 
 figure
@@ -132,55 +133,53 @@ plot(datetime(table2array(round1TDailyData(:,1))),normData);
 legend('Temperature','Cloud Cover','Wind Speed', 'Relative Humidity', 'Precipitation', 'Solar Radiation' ,'Volume')
 ylabel('Normalised')
 
-%%
 figure
 
-subplot(3,2,1)
+subplot(3,3,1)
 plot(datetime(table2array(round1TDailyData(:,1))),normData(:,1),datetime(table2array(round1TDailyData(:,1))),normData(:,8),'k')
 title('Temperature vs Volume')
 ylabel('Normalised')
 legend('Temperature','Volume')
 
-subplot(3,2,2)
+subplot(3,3,2)
 plot(datetime(table2array(round1TDailyData(:,1))),normData(:,2),datetime(table2array(round1TDailyData(:,1))),normData(:,8),'k')
 title('Cloud Cover vs Volume')
 ylabel('Normalised')
 legend('Cloud Cover','Volume')
 
-subplot(3,2,3)
+subplot(3,3,3)
 plot(datetime(table2array(round1TDailyData(:,1))),normData(:,3),datetime(table2array(round1TDailyData(:,1))),normData(:,8),'k')
 title('Wind Speed vs Volume')
 ylabel('Normalised')
 legend('Wind Speed','Volume')
 
-subplot(3,2,4)
+subplot(3,3,4)
 plot(datetime(table2array(round1TDailyData(:,1))),normData(:,4),datetime(table2array(round1TDailyData(:,1))),normData(:,8),'k')
 title('Relative Humidity vs Volume')
 ylabel('Normalised')
 legend('Relative Humidity','Volume')
 
-subplot(3,2,5)
+subplot(3,3,5)
 plot(datetime(table2array(round1TDailyData(:,1))),normData(:,5),datetime(table2array(round1TDailyData(:,1))),normData(:,8),'k')
 title('Atmospheric Precipitation vs Volume')
 ylabel('Normalised')
 legend('Atmospheric Precipitation','Volume')
 
-subplot(3,2,6)
+subplot(3,3,6)
 plot(datetime(table2array(round1TDailyData(:,1))),normData(:,6),datetime(table2array(round1TDailyData(:,1))),normData(:,8),'k')
 title('Solar Radiation vs Volume')
 ylabel('Normalised')
 legend('Solar Radiation','Volume')
 
-%%
-figure
-subplot(3,1,1)
+% figure
+subplot(3,3,7)
 title('Weekday');
 
-subplot(3,1,2)
+subplot(3,3,8)
 title('winter')
 bar([1 0],[winterYes winterNo]);
 
-subplot(3,1,3)
+subplot(3,3,3)
 title('School')
 bar([1 0],[schoolHolYes schoolHolNo]);
 
