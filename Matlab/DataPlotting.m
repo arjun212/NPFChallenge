@@ -31,8 +31,12 @@ round1TDailyData(:,10)
 qualData=[qualData table2array(round1TDailyData(:,11:12))];
 
 %%
+<<<<<<< HEAD
 % Scatter plots
 data=table2array(round1TDailyData(:,2:end-5));
+=======
+data=[table2array(round1TDailyData(:,2:end-5)), table2array(round1TDailyData(:,end-2:end))];
+>>>>>>> origin/master
 
 figure
 subplot(2,1,1)
@@ -81,15 +85,15 @@ ylabel('Volume')
 xlabel('Relative Humidity')
 
 subplot(3,2,5)
-co = corr(data(:,5),data(:,8));
-scatter(data(:,5),data(:,8),'.')
+co = corr(data(:,10),data(:,8));
+scatter(data(:,10),data(:,8),'.')
 title(sprintf('Atmospheric Precipitation vs Volume R=%f', co))
 ylabel('Volume')
 xlabel('Atmospheric Precipitation')
 
 subplot(3,2,6)
-co = corr(data(:,6),data(:,8));
-scatter(data(:,6),data(:,8),'.')
+co = corr(data(:,11),data(:,8));
+scatter(data(:,11),data(:,8),'.')
 title(sprintf('Solar Radiation vs Volume R=%f', co))
 ylabel('Volume')
 xlabel('Solar Radiation')
