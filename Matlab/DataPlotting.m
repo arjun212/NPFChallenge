@@ -31,12 +31,11 @@ round1TDailyData(:,10)
 qualData=[qualData table2array(round1TDailyData(:,11:12))];
 
 %%
-<<<<<<< HEAD
 % Scatter plots
-data=table2array(round1TDailyData(:,2:end-5));
-=======
+%data=table2array(round1TDailyData(:,2:end-5));
+% =======
 data=[table2array(round1TDailyData(:,2:end-5)), table2array(round1TDailyData(:,end-2:end))];
->>>>>>> origin/master
+% >>>>>>> origin/master
 
 figure
 subplot(2,1,1)
@@ -183,7 +182,7 @@ subplot(3,3,8)
 title('winter')
 bar([1 0],[winterYes winterNo]);
 
-subplot(3,3,3)
+subplot(3,3,9)
 title('School')
 bar([1 0],[schoolHolYes schoolHolNo]);
 
