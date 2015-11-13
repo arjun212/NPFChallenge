@@ -28,6 +28,11 @@ round1THourlyData=[array2table(date2Num) round1training2of2(:,3:8) array2table(d
 round1THourlyData.Properties.VariableNames={'DateNum' 'Temperature' 'CloudCover' 'WindSpeed' 'RelativeHumidity'...
     'Atmospheric_Precipitation' 'SolarRadiation' 'School' 'Winter' 'Volume'};
 
+%Clean Up: Find, list and remove 'NaN' rows
+missVals=ismissing(round1THourlyData,{NaN}); %Finds cells with 'NaN'
+round1THourlyData(any(missVals,2),:);%lists rows with 'NaN'
+round1THourlyData=round1THourlyData(~any(missVals,2),:);%Removes rows with 'NaN'
+
 save('round1THourlyData','round1THourlyData')
 
 %% Creating dailyData matrix
