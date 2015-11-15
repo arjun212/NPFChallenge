@@ -6,6 +6,10 @@
 %
 %   variables - input data.
 %   vol - target data.
+clear;
+load('round1THourlyData.mat');
+variables=[table2array(round1THourlyData(:,2:8))];
+vol=table2array(round1THourlyData(:,9));
 
 x = variables';
 t = vol';
@@ -45,6 +49,7 @@ view(net)
 %figure, plotregression(t,y)
 %figure, plotfit(net,x,t)
 
+% Save neural network
 %save('NeuralNetFitting_HourlyData','net')
 
 %% plotting
