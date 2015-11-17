@@ -9,7 +9,7 @@
 
 clear;
 load('round1TDailyData.mat');
-x=table2array(round1TDailyData(:,[2 3 4 5 8 13 14]));
+x=table2array(round1TDailyData(:,[2 3 4 5 6 7 8]));
 vol=table2array(round1TDailyData(:,9));
 time=datetime(table2array(round1TDailyData(:,1)));
 
@@ -26,7 +26,7 @@ trainFcn = 'trainbr';  % Bayesian Regularization backpropagation.
 % Create a Nonlinear Autoregressive Network with External Input
 inputDelays = 1:1;
 feedbackDelays = 1:1;
-hiddenLayerSize = 20;
+hiddenLayerSize = 10;
 net = narxnet(inputDelays,feedbackDelays,hiddenLayerSize,'open',trainFcn);
 
 % Prepare the Data for Training and Simulation
@@ -72,7 +72,7 @@ netc.name = [net.name ' - Closed Loop'];
 view(netc)
 [xc,xic,aic,tc] = preparets(netc,X,{},T);
 yc = netc(xc,xic,aic);
-closedLoopPerformance = perform(net,tc,yc)
+closedLoopPerformance = perform(net,tc,yc);
 
 % Step-Ahead Prediction Network
 % For some applications it helps to get the prediction a timestep early.
@@ -91,10 +91,10 @@ ys = nets(xs,xis,ais);
 stepAheadPerformance = perform(nets,ts,ys);
 
 %adujusting acual volume by 'd', delay
-vol=vol(1:end);
+vol2=vol(1:end);
 
 %mape
-rowsInTest=tr.trainInd';
+rowsInTest=tr.testInd';
 
 inputTestVol = vol(rowsInTest,:);
 outputTestVol = cell2mat(y(:,rowsInTest)');
@@ -102,8 +102,9 @@ MAPE = mean(abs((outputTestVol-inputTestVol))./inputTestVol)*100;
 
 
 figure
-plot(cell2mat(y));hold all; plot(vol)
+plot((cell2mat(y)));hold all; plot(vol2)
 legend('Predicted','Acutal');
 title(strcat('ANN Model','(MAPE=',num2str(MAPE),'%)'));
 ylabel('Gas Consumption (kWh)')
 
+save('Round1ANNFinal','net')
