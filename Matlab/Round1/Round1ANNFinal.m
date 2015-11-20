@@ -25,8 +25,8 @@ trainFcn = 'trainbr';  % Bayesian Regularization backpropagation.
 
 % Create a Nonlinear Autoregressive Network with External Input
 inputDelays = 1:1;
-feedbackDelays = 1:1;
-hiddenLayerSize = 10;
+feedbackDelays = 1:5;
+hiddenLayerSize = 12;
 net = narxnet(inputDelays,feedbackDelays,hiddenLayerSize,'open',trainFcn);
 
 % Prepare the Data for Training and Simulation
@@ -48,7 +48,7 @@ net.divideParam.testRatio = 15/100;
 % Test the Network
 y = net(x,xi,ai);
 e = gsubtract(t,y);
-performance = perform(net,t,y)
+performance = perform(net,t,y);
 
 % View the Network
 view(net)
@@ -108,3 +108,40 @@ title(strcat('ANN Model','(MAPE=',num2str(MAPE),'%)'));
 ylabel('Gas Consumption (kWh)')
 
 save('Round1ANNFinal','net')
+
+
+%% running predictions
+ clear;
+load('round1FDailyData.mat');
+load('Round1ANNFinal.mat');
+load('round1TDailyData.mat');
+load('round1answer.mat');
+
+% Closed-loop neural network
+view(net)
+netc = closeloop(net);
+netc.name = [net.name ' - Closed Loop'];
+view(netc)
+
+delay=netc.numLayerDelays;
+
+x1=[num2cell(table2array(round1TDailyData(end-delay+1:end,2:8))',1) num2cell(table2array(round1FDailyData(:,1:7))',1)];
+t1=zeros(183+delay,1)';
+for i=1:1:delay-1
+    t1(i)=table2array(round1TDailyData((end-delay+i),9));
+end
+t1=num2cell(t1);
+
+[xc,xic,aic,tc] = preparets(netc,x1,{},t1);
+yc = netc(xc,xic,aic);
+closedLoopPerformance = perform(netc,tc,yc);
+
+MAPEactual = mean(abs((cell2mat(yc)'-table2array(round1answer(:,end)))./table2array(round1answer(:,end)))*100);
+
+figure
+plot(cell2mat(yc),'b');hold all; plot(table2array(round1answer(:,end)),'g');plot(smooth(cell2mat(yc)),'r')
+legend('Predicted','Acutal');
+title(strcat('ANN Model','(MAPE Acutal=',num2str(MAPEactual),'%)'));
+ylabel('Gas Consumption (kWh)')
+
+

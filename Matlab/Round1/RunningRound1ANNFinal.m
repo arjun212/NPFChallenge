@@ -7,6 +7,11 @@ xi=[{table2array(round1TDailyData(end,2:8))'};table2cell(round1TDailyData(end,9)
 x=[num2cell(table2array(round1FDailyData(1,1:7))',1)...
     ;table2cell(round1TDailyData(end,9))];
 
+input=table2array(round1FDailyData(1
+
+[xs,xis,ais,ts] = preparets(net,inputSeries,{},targetSeries);
+
+
 [r,c]=size(round1FDailyData);
 volPred={};
 for i=1:1:r
